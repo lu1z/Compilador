@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -17,8 +16,8 @@ public class App extends Application{
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URL("file:fxml/gui.fxml"));
-        AnchorPane vbox = loader.<AnchorPane>load();
-        Scene scene = new Scene(vbox);
+        AnchorPane root = loader.<AnchorPane>load();
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

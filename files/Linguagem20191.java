@@ -6,7 +6,7 @@ public class Linguagem20191 implements Linguagem20191Constants {
     while (true)
     {
       System.out.println("Reading from standard input...");
-      System.out.print("Enter an expression like \u005c"1+(2+3)*4;\u005c" :");
+      System.out.print("Enter an program");
       try
       {
         switch (Linguagem20191.one_line())
