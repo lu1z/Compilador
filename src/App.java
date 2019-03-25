@@ -1,9 +1,25 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class App {
+import java.net.URL;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class App extends Application{
 
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(new URL("file:fxml/gui.fxml"));
+        AnchorPane vbox = loader.<AnchorPane>load();
+        Scene scene = new Scene(vbox);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }

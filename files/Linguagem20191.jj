@@ -1,0 +1,97 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{
+  IGNORE_CASE = true;  static = true;}PARSER_BEGIN(Linguagem20191)
+public class Linguagem20191{  public static void main(String args []) throws ParseException  {    Linguagem20191 parser = new Linguagem20191(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (Linguagem20191.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        Linguagem20191.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(Linguagem20191)SKIP :{  " "| "\r"| "\t"| "\n"}
+TOKEN : /*COMENTARIES*/
+{
+  < SINGLE_LINE_COMENTARY : ":-" >
+| < OPEN_COMENTARY : "/*" >
+| < CLOSED_COMENTARY : "*/" >
+}
+
+TOKEN : /* RESERVED_SIMBOLS */
+{
+  < DOT : "." >
+| < COMMA : "," >
+| < OPEN_CURLY_BRACKET : "{" >
+| < CLOSED_CURLY_BRACKET : "}" >
+| < OPEN_PARENTHESE : "(" >
+| < CLOSED_PARENTHESE : ")" >
+}
+
+TOKEN : /* ARITMETIC_OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < DIVISION_REST : "%%" >
+| < EXACT_DIVISION : "%" >
+| < POW : "**" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+}
+
+TOKEN : /* RELACIONAL_OPERATORS */
+{
+  < EQUAL : "==" >
+| < DIFFERENT : "!=" >
+| < MORE_EQUAL : ">=" >
+| < LESS_EQUAL : "<=" >
+| < MORE_ : ">" >
+| < LESS : "<" >
+}
+
+TOKEN : /* LOGIC_OPERATORS */
+{
+  < AND : "&" >
+| < OR : "|" >
+| < NOT : "!" >
+}
+
+TOKEN : /* VARIABLE_TYPES */
+{
+  < NATURAL : "natural" >
+| < REAL : "real" >
+| < CHAR : "char" >
+| < BOOLEAN : "boolean" >
+}
+
+TOKEN : /* RESERVED_WORDS */
+{
+  < PROGRAM : "program" >
+| < DEFINE : "define" >
+| < _NOT : "not" >
+| < VARIABLE : "variable" >
+| < IS : "is" >
+| < EXECUTE : "execute" >
+| < SET : "set" >
+| < TO : "to" >
+| < GET : "get" >
+| < PUT : "put" >
+| < VERIFY : "verify" >
+| < _TRUE : "true" >
+| < _FALSE : "false" >
+| < LOOP : "loop" >
+| < WHILE : "while" >
+}TOKEN :{  < INTEGER_CONSTANT : ("-")?(<DIGIT>)+ >
+| < REAL_CONSTANT: ("-")?(<DIGIT>)+("."(<DIGIT>)+ )? >| < #DIGIT : ["0"-"9"] >}
+TOKEN : {
+  < LOGIC_CONSTANT : "true" | "false" >
+| < IDENTIFIER : ("_"((<LETTER>|<DIGIT>)+"_")*(<LETTER>|<DIGIT>)*)|(<LETTER>(<LETTER>|<DIGIT>)*("_"|("_"(<LETTER>|<DIGIT>)+)*)(<LETTER>|<DIGIT>)*) >
+| < LITERAL_CONSTANT : "'"<LETTER>"'" >
+| < #LETTER: (["a"-"z"]) >
+}
+
+int one_line() :
+{}
+{
+  {
+    return 0;
+  }
+  {
+    return 1;
+  }
+}
+
+/**int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}
+*/

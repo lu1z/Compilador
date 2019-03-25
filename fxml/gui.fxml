@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiController">
+   <children>
+      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <MenuItem fx:id="menu_file_new" mnemonicParsing="false" onAction="#doNew" text="New" />
+                        <MenuItem fx:id="menu_file_open" mnemonicParsing="false" onAction="#doOpen" text="Open" />
+                    <MenuItem fx:id="menu_file_save" mnemonicParsing="false" onAction="#doSave" text="Save" />
+                        <MenuItem fx:id="menu_file_saveAs" mnemonicParsing="false" onAction="#doSaveAs" text="Save as" />
+                        <MenuItem fx:id="menu_file_exit" mnemonicParsing="false" onAction="#doExit" text="Exit" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                        <MenuItem fx:id="menu_edit_copy" mnemonicParsing="false" onAction="#doCopy" text="Copy" />
+                        <MenuItem fx:id="menu_edit_paste" mnemonicParsing="false" onAction="#doPaste" text="Paste" />
+                    <MenuItem fx:id="menu_edit_cut" mnemonicParsing="false" onAction="#doCut" text="Cut" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Compilation">
+                  <items>
+                        <MenuItem fx:id="menu_compilation_compile" mnemonicParsing="false" onAction="#doCompile" text="Compile" />
+                        <MenuItem fx:id="menu_compilation_execute" mnemonicParsing="false" onAction="#doExecute" text="Execute" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT">
+              <items>
+                <Button fx:id="toolbar_button_execute" mnemonicParsing="false" onAction="#doExecute" text="Execute" />
+                  <Button fx:id="toolbar_button_compile" mnemonicParsing="false" onAction="#doCompile" text="Compile" />
+              </items>
+            </ToolBar>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+              <items>
+                <AnchorPane>
+                     <children>
+                        <TextArea fx:id="text_input" onKeyTyped="#doUpdateCursorCoordinate" onMouseReleased="#doUpdateCursorCoordinate" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane>
+                     <children>
+                        <TextArea fx:id="text_output" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <AnchorPane>
+               <children>
+                  <Label fx:id="label_cursor_coordinate" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                  <Label fx:id="label_file_name" contentDisplay="RIGHT" textAlignment="RIGHT" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
