@@ -2,25 +2,30 @@
 public class Linguagem20191 implements Linguagem20191Constants {
   public static void main(String args []) throws ParseException
   {
-    Linguagem20191 parser = new Linguagem20191(System.in);
-    while (true)
-    {
-      System.out.println("Reading from standard input...");
-      System.out.print("Enter an program");
+    Linguagem20191 parser;
       try
       {
-        switch (Linguagem20191.one_line())
+        switch (args.length)
         {
           case 0 :
-          System.out.println("OK.");
+                 System.out.println("Reading from standard input...");
+                 System.out.print("Enter an program");
+             parser = new Linguagem20191(System.in);
+             System.out.println("OK.");
           break;
           case 1 :
-          System.out.println("Goodbye.");
+              System.out.println ("Reading the file " + args[0] + " ..." );
+                  parser = new Linguagem20191(new java.io.FileInputStream(args[0]));
+                  System.out.println("Goodbye.");
           break;
           default :
           break;
         }
       }
+      catch(java.io.FileNotFoundException e) {
+                System.out.println ("The file " + args[0] + " was not found.");
+          return;
+       }
       catch (Exception e)
       {
         System.out.println("NOK.");
@@ -31,15 +36,10 @@ public class Linguagem20191 implements Linguagem20191Constants {
       {
         System.out.println("Oops.");
         System.out.println(e.getMessage());
-        break;
       }
-    }
-  }
-
-  static final public int one_line() throws ParseException {
-    {if (true) return 0;}
-    {if (true) return 1;}
-    throw new Error("Missing return statement in function");
+      
+      for(Token t = getNextToken(); t.kind != EOF; t = getNextToken())
+    	  System.out.println(""+t.kind);
   }
 
   static private boolean jj_initialized_once = false;

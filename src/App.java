@@ -18,6 +18,7 @@ public class App extends Application{
         loader.setLocation(new URL("file:fxml/gui.fxml"));
         AnchorPane root = loader.<AnchorPane>load();
         Scene scene = new Scene(root);
+        primaryStage.setTitle("Compiler");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
