@@ -9,110 +9,108 @@ public interface Linguagem20191Constants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int SINGLE_LINE_COMENTARY = 5;
+  int DOT = 11;
   /** RegularExpression Id. */
-  int OPEN_COMENTARY = 6;
+  int COMMA = 12;
   /** RegularExpression Id. */
-  int CLOSED_COMENTARY = 7;
+  int OPEN_CURLY_BRACKET = 13;
   /** RegularExpression Id. */
-  int DOT = 8;
+  int CLOSED_CURLY_BRACKET = 14;
   /** RegularExpression Id. */
-  int COMMA = 9;
+  int OPEN_PARENTHESE = 15;
   /** RegularExpression Id. */
-  int OPEN_CURLY_BRACKET = 10;
+  int CLOSED_PARENTHESE = 16;
   /** RegularExpression Id. */
-  int CLOSED_CURLY_BRACKET = 11;
+  int PLUS = 17;
   /** RegularExpression Id. */
-  int OPEN_PARENTHESE = 12;
+  int MINUS = 18;
   /** RegularExpression Id. */
-  int CLOSED_PARENTHESE = 13;
+  int DIVISION_REST = 19;
   /** RegularExpression Id. */
-  int PLUS = 14;
+  int EXACT_DIVISION = 20;
   /** RegularExpression Id. */
-  int MINUS = 15;
+  int POW = 21;
   /** RegularExpression Id. */
-  int DIVISION_REST = 16;
+  int MULTIPLY = 22;
   /** RegularExpression Id. */
-  int EXACT_DIVISION = 17;
+  int DIVIDE = 23;
   /** RegularExpression Id. */
-  int POW = 18;
+  int EQUAL = 24;
   /** RegularExpression Id. */
-  int MULTIPLY = 19;
+  int DIFFERENT = 25;
   /** RegularExpression Id. */
-  int DIVIDE = 20;
+  int MORE_EQUAL = 26;
   /** RegularExpression Id. */
-  int EQUAL = 21;
+  int LESS_EQUAL = 27;
   /** RegularExpression Id. */
-  int DIFFERENT = 22;
+  int MORE_ = 28;
   /** RegularExpression Id. */
-  int MORE_EQUAL = 23;
+  int LESS = 29;
   /** RegularExpression Id. */
-  int LESS_EQUAL = 24;
+  int AND = 30;
   /** RegularExpression Id. */
-  int MORE_ = 25;
+  int OR = 31;
   /** RegularExpression Id. */
-  int LESS = 26;
+  int NOT = 32;
   /** RegularExpression Id. */
-  int AND = 27;
+  int NATURAL = 33;
   /** RegularExpression Id. */
-  int OR = 28;
+  int REAL = 34;
   /** RegularExpression Id. */
-  int NOT = 29;
+  int CHAR = 35;
   /** RegularExpression Id. */
-  int NATURAL = 30;
+  int BOOLEAN = 36;
   /** RegularExpression Id. */
-  int REAL = 31;
+  int PROGRAM = 37;
   /** RegularExpression Id. */
-  int CHAR = 32;
+  int DEFINE = 38;
   /** RegularExpression Id. */
-  int BOOLEAN = 33;
+  int _NOT = 39;
   /** RegularExpression Id. */
-  int PROGRAM = 34;
+  int VARIABLE = 40;
   /** RegularExpression Id. */
-  int DEFINE = 35;
+  int IS = 41;
   /** RegularExpression Id. */
-  int _NOT = 36;
+  int EXECUTE = 42;
   /** RegularExpression Id. */
-  int VARIABLE = 37;
+  int SET = 43;
   /** RegularExpression Id. */
-  int IS = 38;
+  int TO = 44;
   /** RegularExpression Id. */
-  int EXECUTE = 39;
+  int GET = 45;
   /** RegularExpression Id. */
-  int SET = 40;
+  int PUT = 46;
   /** RegularExpression Id. */
-  int TO = 41;
+  int VERIFY = 47;
   /** RegularExpression Id. */
-  int GET = 42;
+  int _TRUE = 48;
   /** RegularExpression Id. */
-  int PUT = 43;
+  int _FALSE = 49;
   /** RegularExpression Id. */
-  int VERIFY = 44;
+  int LOOP = 50;
   /** RegularExpression Id. */
-  int _TRUE = 45;
+  int WHILE = 51;
   /** RegularExpression Id. */
-  int _FALSE = 46;
+  int INTEGER_CONSTANT = 52;
   /** RegularExpression Id. */
-  int LOOP = 47;
+  int REAL_CONSTANT = 53;
   /** RegularExpression Id. */
-  int WHILE = 48;
+  int DIGIT = 54;
   /** RegularExpression Id. */
-  int INTEGER_CONSTANT = 49;
+  int LOGIC_CONSTANT = 55;
   /** RegularExpression Id. */
-  int REAL_CONSTANT = 50;
+  int IDENTIFIER = 56;
   /** RegularExpression Id. */
-  int DIGIT = 51;
+  int LITERAL_CONSTANT = 57;
   /** RegularExpression Id. */
-  int LOGIC_CONSTANT = 52;
-  /** RegularExpression Id. */
-  int IDENTIFIER = 53;
-  /** RegularExpression Id. */
-  int LITERAL_CONSTANT = 54;
-  /** RegularExpression Id. */
-  int LETTER = 55;
+  int LETTER = 58;
 
   /** Lexical state. */
   int DEFAULT = 0;
+  /** Lexical state. */
+  int multilinecomment = 1;
+  /** Lexical state. */
+  int singlelinecomment = 2;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -121,9 +119,12 @@ public interface Linguagem20191Constants {
     "\"\\r\"",
     "\"\\t\"",
     "\"\\n\"",
-    "\":-\"",
     "\"/*\"",
     "\"*/\"",
+    "<token of kind 7>",
+    "\":-\"",
+    "\"\\n\"",
+    "<token of kind 10>",
     "\".\"",
     "\",\"",
     "\"{\"",
