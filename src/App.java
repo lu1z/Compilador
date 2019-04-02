@@ -1,17 +1,20 @@
 import java.io.File;
 import java.net.URL;
-
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class App extends Application implements  Linguagem20191Constants {
+public class App extends Application implements  LinguagemConstants {
 
 	public static Scene scene;
 	public static Stage stage;
-	public static Linguagem20191 parser;
+	public static Linguagem parser;
 	public static File file;
 	
     public static void main(String[] args) {
@@ -23,28 +26,48 @@ public class App extends Application implements  Linguagem20191Constants {
     	stage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URL("file:fxml/gui.fxml"));
-        AnchorPane root = loader.<AnchorPane>load();
+        VBox root = loader.<VBox>load();
         scene = new Scene(root);
         primaryStage.setTitle("Compiler");
         primaryStage.setScene(scene);
         primaryStage.show();
+        addTextImputAreaACursorListener();
     }
     
-    public void readFile(){
+    private void addTextImputAreaACursorListener() {
+        TextArea ta = (TextArea) App.scene.lookup("#text_input");
+        Label la = (Label) App.scene.lookup("#label_cursor_coordinate");
+        ta.caretPositionProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            	String rawText = ta.getText().substring(0, newValue.intValue());
+                String[] lineCharacters = rawText.split("\n");
+                int lines = lineCharacters.length;
+                String lastLineCharacters = lineCharacters[lines - 1];
+                int colluns = lastLineCharacters.length();
+                char c = '\0';
+                if(newValue.intValue() > 0)
+                	 c = rawText.charAt(newValue.intValue() - 1);		
+                if(c == '\n')
+                	la.setText("Line: "+ (lines + 1) + " Collun: " + 0);
+                else
+                	la.setText("Line: "+ lines + " Collun: " + colluns);
+            }
+        });
+	}
+
+	public void readFile(){
         try{
-        	System.out.println ("Reading the file " + ""+ " ..." );
-            parser = new Linguagem20191(new java.io.FileInputStream(""));
+        	
+         //   for(Token t = App.parser.getNextToken(); t.kind != App.EOF; t = App.parser.getNextToken())
+       //     	to.appendText("Token kind: " + t.kind + " Image: " + t.image + "\n");
                     
         }
-        catch(java.io.FileNotFoundException e) {
-                  System.out.println ("The file " +"" + " was not found.");
-            return;
-         }
         catch (Exception e)
         {
           System.out.println("NOK.");
           System.out.println(e.getMessage());
-          Linguagem20191.ReInit(System.in);
+          Linguagem.ReInit(System.in);
         }
         catch (Error e)
         {
