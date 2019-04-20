@@ -1,110 +1,0 @@
-/**
- * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{
-  IGNORE_CASE = true;  static = true;}PARSER_BEGIN(Linguagem20191)
-public class Linguagem20191{}PARSER_END(Linguagem20191)SKIP :{  " "| "\r"| "\t"| "\n"}
-/*COMENTARIES*/
-SKIP :
-{
-"/*": multilinecomment
-}
-<multilinecomment> SKIP:
-{
-"*/": DEFAULT
-|<~[]>
-}
-
-SKIP : {
-":-": singlelinecomment
-}
-<singlelinecomment> SKIP:
-{
-"\n": DEFAULT
-|<~[]>
-}
-
-TOKEN : /* RESERVED_SIMBOLS */
-{
-  < DOT : "." >
-| < COMMA : "," >
-| < OPEN_CURLY_BRACKET : "{" >
-| < CLOSED_CURLY_BRACKET : "}" >
-| < OPEN_PARENTHESE : "(" >
-| < CLOSED_PARENTHESE : ")" >
-}
-
-TOKEN : /* ARITMETIC_OPERATORS */
-{
-  < PLUS : "+" >
-| < MINUS : "-" >
-| < DIVISION_REST : "%%" >
-| < EXACT_DIVISION : "%" >
-| < POW : "**" >
-| < MULTIPLY : "*" >
-| < DIVIDE : "/" >
-}
-
-TOKEN : /* RELACIONAL_OPERATORS */
-{
-  < EQUAL : "==" >
-| < DIFFERENT : "!=" >
-| < MORE_EQUAL : ">=" >
-| < LESS_EQUAL : "<=" >
-| < MORE_ : ">" >
-| < LESS : "<" >
-}
-
-TOKEN : /* LOGIC_OPERATORS */
-{
-  < AND : "&" >
-| < OR : "|" >
-| < NOT : "!" >
-}
-
-TOKEN : /* VARIABLE_TYPES */
-{
-  < NATURAL : "natural" >
-| < REAL : "real" >
-| < CHAR : "char" >
-| < BOOLEAN : "boolean" >
-}
-
-TOKEN : /* RESERVED_WORDS */
-{
-  < PROGRAM : "program" >
-| < DEFINE : "define" >
-| < _NOT : "not" >
-| < VARIABLE : "variable" >
-| < IS : "is" >
-| < EXECUTE : "execute" >
-| < SET : "set" >
-| < TO : "to" >
-| < GET : "get" >
-| < PUT : "put" >
-| < VERIFY : "verify" >
-| < _TRUE : "true" >
-| < _FALSE : "false" >
-| < LOOP : "loop" >
-| < WHILE : "while" >
-}TOKEN :{  < INTEGER_CONSTANT : ("-")?(<DIGIT>)+ >
-| < REAL_CONSTANT: ("-")?(<DIGIT>)+("."(<DIGIT>)+ )? >| < #DIGIT : ["0"-"9"] >}
-TOKEN : {
-  < LOGIC_CONSTANT : "true" | "false" >
-| < IDENTIFIER : ("_"((<LETTER>|<DIGIT>)+"_")*(<LETTER>|<DIGIT>)*)|(<LETTER>(<LETTER>|<DIGIT>)*("_"|("_"(<LETTER>|<DIGIT>)+)*)(<LETTER>|<DIGIT>)*) >
-| < LITERAL_CONSTANT : "'"<LETTER>"'" >
-| < #LETTER: (["a"-"z"]) >
-}
-
-/**
-int one_line() :
-{}
-{
-  {
-    return 0;
-  }
-  {
-    return 1;
-  }
-}
-int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}
-*/
