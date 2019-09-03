@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.nio.file.Files;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,30 +9,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class GuiController extends VBox {
-	
     @FXML
-    public void doCompile(Event e) throws ParseException, FileNotFoundException{
+    public void doCompile(Event e) throws FileNotFoundException {
     	TextArea to = (TextArea) App.scene.lookup("#text_output");
-    	TextArea ti = (TextArea) App.scene.lookup("#text_input");
-        try{
-            String input = ti.getText();
-            Reader reader = new StringReader(input);
-        	App.parser = new Linguagem(reader);
-            for(Token t = App.parser.getNextToken(); t.kind != App.EOF; t = App.parser.getNextToken())
-            	to.appendText("Token kind: " + t.kind + " Image: " + t.image + "\n");
-        }
-        catch(TokenMgrError er){
-        	to.setText(er.getMessage());
-            System.out.println (er.getMessage());
-            Linguagem.ReInit(new java.io.FileInputStream(App.file.getPath()));
-        }
-        catch (Error er) {
-        	to.setText(er.getMessage());
-            System.out.println (er.getMessage());
-            Linguagem.ReInit(new java.io.FileInputStream(App.file.getPath()));
-        }
-
+    	TextArea ti = (TextArea) App.scene.lookup("#text_input");   
+        App.listTokens(ti, to);
     }
+    
     @FXML
     public void doExecute(Event e){
         System.out.println("Button clicked");

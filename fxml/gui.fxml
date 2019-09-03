@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" minHeight="600.0" minWidth="800.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiController">
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiController">
    <children>
       <MenuBar maxHeight="-Infinity" minHeight="-Infinity" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER">
         <menus>
@@ -41,10 +41,15 @@
             <Button fx:id="toolbar_button_new" mnemonicParsing="false" onAction="#doNew" text="New" />
         </items>
       </ToolBar>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.5988483685220729" orientation="VERTICAL" VBox.vgrow="ALWAYS">
         <items>
-            <TextArea fx:id="text_input" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <TextArea fx:id="text_output" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane>
+               <children>
+                  <Label fx:id="label_line_number" alignment="TOP_RIGHT" contentDisplay="TOP" minWidth="18.0" textAlignment="RIGHT" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                  <TextArea fx:id="text_input" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <TextArea fx:id="text_output" minHeight="-Infinity" minWidth="-Infinity" />
         </items>
       </SplitPane>
       <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" VBox.vgrow="NEVER">

@@ -1,0 +1,120 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  STATIC = false;}PARSER_BEGIN(Linguagem20192)
+public class Linguagem20192{
+	void Start(Linguagem20192 parser) {
+	}}PARSER_END(Linguagem20192)SKIP : /*FORMATTING CHARACTERS & COMENTARIES*/
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| "\f"
+| "//" : singlelinecomment
+| "/*" : multilinecomment
+}
+
+< singlelinecomment > SKIP :
+{
+  "\n" : DEFAULT
+| "\r" : DEFAULT
+| "\r\n" : DEFAULT
+| <~[]>
+}
+
+< multilinecomment > SKIP :
+{
+  "*/" : DEFAULT
+| <~[]>
+}
+
+TOKEN : /* RELACIONAL_OPERATORS */
+{
+  < EQUAL : "==" >
+| < DIFFERENT : "!=" >
+| < _MORE : ">>>" >
+| < _LESS : "<<" >
+| < MORE_EQUAL : ">>=" >
+| < LESS_EQUAL : "<<=" >
+}
+
+TOKEN : /* RESERVED_SIMBOLS */
+{
+  < DOT : "." >
+| < COMMA : "," >
+| < OPEN_SQUARE_BRACKETS : "[" >
+| < CLOSED_CURLY_BRACKET : "]" >
+| < OPEN_PARENTHESE : "(" >
+| < CLOSED_PARENTHESE : ")" >
+| < DECLARATION : "=" >
+}
+
+TOKEN : /* ARITMETIC_OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < DIVISION_REST : "%%" >
+| < EXACT_DIVISION : "%" >
+| < POW : "**" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+}
+
+TOKEN : /* LOGIC_OPERATORS */
+{
+  < AND : "&" >
+| < OR : "|" >
+| < NOT : "!" >
+}
+
+TOKEN [IGNORE_CASE] : /* DATA_TYPES */
+{
+  < INTEGER : "integer" >
+| < REAL : "real" >
+| < STRING : "string" >
+| < BOOLEAN : "boolean" >
+}
+
+TOKEN [IGNORE_CASE] : /* RESERVED_WORDS */
+{
+  < PROGRAM : "program" >
+| < EXECUTE : "execute" >
+| < THIS : "this" >
+| < PURPOSE : "purpose" >
+| < DECLARE : "declare" >
+| < AS : "as" >
+| < CONSTANT : "constant" >
+| < VARIABLE : "variable" >
+| < ASSIGN : "assign" >
+| < ATRIBUTION : ">>" >
+| < ACQUIRE : "acquire" >
+| < SHOW : "show" >
+| < PUT : "put" >
+| < CHECK : "check" >
+| < _TRUE : "true" >
+| < _UNTRUE : "untrue" >
+| < CARRY : "carry" >
+| < OUT : "out" >
+}
+
+TOKEN [IGNORE_CASE] : /* CONSTANTS */
+{
+  < LOGIC_CONSTANT : "true" | "untrue" >
+| < INTEGER_CONSTANT : (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)? >
+| < REAL_CONSTANT: (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?"."(<DIGIT>)(<DIGIT>)?(<DIGIT>)? >
+| < LITERAL_CONSTANT : "\"" <CHAR><CHAR>(<CHAR>)* "\"" >
+}
+
+TOKEN : /* IDENTIFIER */
+{
+  < IDENTIFIER : (<MALETTER>)("_"|((<LETTER>)*((<DIGIT><DIGIT><LETTER>("_")?)+|((<DIGIT><LETTER>)+)|<DIGIT><DIGIT>"_"|<DIGIT>"_")*(<LETTER>)*)*)?> 
+}
+
+TOKEN : /* AUXILIARIES */
+{
+  < #LETTER: (["a"-"z","A"-"Z"])>
+| < #CHAR : ~["\""] >
+| < #DIGIT : ["0"-"9"] >
+| < #DIGITN0 : ["1"-"9"] >
+| < #MALETTER : (["A"-"Z"]) >
+}
