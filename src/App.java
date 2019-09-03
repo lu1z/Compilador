@@ -81,13 +81,14 @@ public class App extends Application implements Linguagem20192Constants {
 		to.clear();
 		Reader reader = new StringReader(input);
 		try {
-			parser = new Linguagem20192(reader);	
+			parser = new Linguagem20192(reader);		
 			for (Token t = App.parser.getNextToken(); t.kind != App.EOF; t = App.parser.getNextToken()) {
 				to.appendText("Lexeme : " + App.tokenImage[t.kind] + " line: " + t.beginLine + " collun: "
 						+ t.beginColumn + " Category: " + category(t.kind) + " Category number: " + t.kind + " Image: "
 						+ t.image + "\n");
 			}
 		} catch (TokenMgrError er) {
+			to.setText(er.getMessage());
 			System.out.println(er.getMessage());
 			parser = new Linguagem20192(reader);
 		} catch (Error er) {
