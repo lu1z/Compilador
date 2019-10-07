@@ -27,7 +27,7 @@ public interface Linguagem20192Constants {
   /** RegularExpression Id. */
   int OPEN_SQUARE_BRACKETS = 22;
   /** RegularExpression Id. */
-  int CLOSED_CURLY_BRACKET = 23;
+  int CLOSED_SQUARE_BRACKET = 23;
   /** RegularExpression Id. */
   int OPEN_PARENTHESE = 24;
   /** RegularExpression Id. */
@@ -91,33 +91,35 @@ public interface Linguagem20192Constants {
   /** RegularExpression Id. */
   int CHECK = 54;
   /** RegularExpression Id. */
-  int _TRUE = 55;
+  int RESULT = 55;
   /** RegularExpression Id. */
-  int _UNTRUE = 56;
+  int _TRUE = 56;
   /** RegularExpression Id. */
-  int CARRY = 57;
+  int _UNTRUE = 57;
   /** RegularExpression Id. */
-  int OUT = 58;
+  int CARRY = 58;
   /** RegularExpression Id. */
-  int LOGIC_CONSTANT = 59;
+  int OUT = 59;
   /** RegularExpression Id. */
-  int INTEGER_CONSTANT = 60;
+  int LOGIC_CONSTANT = 60;
   /** RegularExpression Id. */
-  int REAL_CONSTANT = 61;
+  int INTEGER_CONSTANT = 61;
   /** RegularExpression Id. */
-  int LITERAL_CONSTANT = 62;
+  int REAL_CONSTANT = 62;
   /** RegularExpression Id. */
-  int IDENTIFIER = 63;
+  int LITERAL_CONSTANT = 63;
   /** RegularExpression Id. */
-  int LETTER = 64;
+  int IDENTIFIER = 64;
   /** RegularExpression Id. */
-  int CHAR = 65;
+  int LETTER = 65;
   /** RegularExpression Id. */
-  int DIGIT = 66;
+  int CHAR = 66;
   /** RegularExpression Id. */
-  int DIGITN0 = 67;
+  int DIGIT = 67;
   /** RegularExpression Id. */
-  int MALETTER = 68;
+  int DIGITN0 = 68;
+  /** RegularExpression Id. */
+  int MALETTER = 69;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -144,7 +146,7 @@ public interface Linguagem20192Constants {
     "<token of kind 13>",
     "\"==\"",
     "\"!=\"",
-    "\">>>\"",
+    "\">>\"",
     "\"<<\"",
     "\">>=\"",
     "\"<<=\"",
@@ -178,11 +180,12 @@ public interface Linguagem20192Constants {
     "\"constant\"",
     "\"variable\"",
     "\"assign\"",
-    "\">>\"",
+    "\">>>\"",
     "\"acquire\"",
     "\"show\"",
     "\"put\"",
     "\"check\"",
+    "\"result\"",
     "\"true\"",
     "\"untrue\"",
     "\"carry\"",

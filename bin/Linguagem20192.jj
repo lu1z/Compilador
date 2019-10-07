@@ -1,9 +1,178 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  STATIC = false;}PARSER_BEGIN(Linguagem20192)
-public class Linguagem20192{
-	void Start(Linguagem20192 parser) {
-	}}PARSER_END(Linguagem20192)SKIP : /*FORMATTING CHARACTERS & COMENTARIES*/
+ */options{  STATIC = false;
+  DEBUG_LOOKAHEAD = true;}PARSER_BEGIN(Linguagem20192)
+public class Linguagem20192{}
+PARSER_END(Linguagem20192)
+
+void syntax() : { }
+{
+  	<PROGRAM> <IDENTIFIER> <OPEN_SQUARE_BRACKETS> <CLOSED_SQUARE_BRACKET>
+		const_var_declaration()
+		<EXECUTE> <THIS> <OPEN_SQUARE_BRACKETS>
+			command_list()
+		<CLOSED_SQUARE_BRACKET>	  purpose_comentary()
+	<EOF>
+}
+
+void const_var_declaration() : { }
+{
+  <DECLARE> <THIS> <OPEN_SQUARE_BRACKETS>
+	<AS> const_var_existence()
+  <CLOSED_SQUARE_BRACKET>
+
+}
+
+void const_var_existence() : { }
+{
+  (    (Const())* (var())* )| ((var())* (Const())*)
+}
+
+void Const() : { }
+{
+  <CONSTANT > ( ident_list() <DECLARATION >
+( < INTEGER > <DECLARATION > <INTEGER_CONSTANT >
+| < REAL > <DECLARATION > <REAL_CONSTANT >
+| < STRING > <DECLARATION > <LITERAL_CONSTANT >))+
+}
+
+void var() : { }
+{
+  < VARIABLE > ( ident_list() <DECLARATION >
+(< INTEGER >
+| < REAL >
+| < STRING >
+| < BOOLEAN >))+    
+}
+
+void ident_list() : { }
+{
+  <IDENTIFIER> ( <COMMA> <IDENTIFIER > )*
+}
+
+void atribution_command() : { }
+{
+  < ASSIGN > <THIS > ident_list() < _MORE > expressao()
+}
+
+void expressao() : { }
+{
+  expressao_arit_logic() expressaoL()
+}
+
+void expressaoL() : { }
+{
+(<EQUAL>
+| < DIFFERENT>
+| < _MORE>
+| < _LESS>
+| < MORE_EQUAL>
+| < LESS_EQUAL>) expressao_arit_logic() | Empty()
+}
+
+void expressao_arit_logic() : { }
+{
+  term2() menor_prioridade()
+}
+
+void menor_prioridade() : { }
+{
+  < PLUS > term2() menor_prioridade()
+| < MINUS > term2() menor_prioridade()
+| < OR > term2() menor_prioridade()
+| Empty()
+}
+
+void term2() : { }
+{
+  term1() media_prioridade()
+}
+
+void media_prioridade() : { }
+{
+
+(< AND >
+| < DIVISION_REST >
+| < EXACT_DIVISION>
+| < MULTIPLY >
+| < DIVIDE >) term1() media_prioridade() | Empty()
+}
+
+void term1() : { }
+{
+  elemento() maior_prioridade()
+}
+
+void maior_prioridade() : { }
+{
+  <POW > elemento() maior_prioridade() | Empty()
+}
+
+void elemento() : { }
+{
+  < IDENTIFIER > indice()
+  | <INTEGER_CONSTANT >
+  | < REAL_CONSTANT >
+  | <LITERAL_CONSTANT >
+  | < _TRUE >
+  | < _UNTRUE >
+  | < OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>
+  | < NOT > < OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>
+  
+}  
+
+void indice() : { }
+{
+  < OPEN_SQUARE_BRACKETS> <INTEGER_CONSTANT > <CLOSED_SQUARE_BRACKET>
+}
+
+void command_list() : { }
+{
+  (atribution_command() | data_in_command() | data_out_command() | selection_command() | repetition_command())+
+}
+
+void purpose_comentary() : { }
+{
+  <PURPOSE> <LITERAL_CONSTANT> | Empty()
+}
+
+void data_in_command() : { }
+{
+ <ACQUIRE> <THIS> < OPEN_SQUARE_BRACKETS> ident_list() (< COMMA > ident_list() )*  <CLOSED_SQUARE_BRACKET> 
+}
+
+
+
+void data_out_command() : { }
+{
+ (<SHOW> | <PUT> ) <THIS>  < OPEN_SQUARE_BRACKETS> (ident_list()
+ | <REAL_CONSTANT>
+ | <INTEGER_CONSTANT>
+ | <LITERAL_CONSTANT> )
+
+  (<COMMA> (ident_list()
+   | <REAL_CONSTANT>
+   | <INTEGER_CONSTANT>
+   | <LITERAL_CONSTANT>) )*
+}
+
+void selection_command() : { }
+{
+ <CHECK> <THIS> expressao() (<_TRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>
+ | <_UNTRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>)
+}
+
+void repetition_command() : { }
+{
+ <CARRY> <OUT> <THIS> expressao()  (< OPEN_SQUARE_BRACKETS>  command_list() <CLOSED_SQUARE_BRACKET> )*
+}
+
+
+void Empty() : {}
+{
+	{}
+}
+SKIP : /*FORMATTING CHARACTERS & COMENTARIES*/
 {
   " "
 | "\t"
@@ -32,7 +201,7 @@ TOKEN : /* RELACIONAL_OPERATORS */
 {
   < EQUAL : "==" >
 | < DIFFERENT : "!=" >
-| < _MORE : ">>>" >
+| < _MORE : ">>" >
 | < _LESS : "<<" >
 | < MORE_EQUAL : ">>=" >
 | < LESS_EQUAL : "<<=" >
@@ -43,7 +212,7 @@ TOKEN : /* RESERVED_SIMBOLS */
   < DOT : "." >
 | < COMMA : "," >
 | < OPEN_SQUARE_BRACKETS : "[" >
-| < CLOSED_CURLY_BRACKET : "]" >
+| < CLOSED_SQUARE_BRACKET : "]" >
 | < OPEN_PARENTHESE : "(" >
 | < CLOSED_PARENTHESE : ")" >
 | < DECLARATION : "=" >
@@ -86,11 +255,12 @@ TOKEN [IGNORE_CASE] : /* RESERVED_WORDS */
 | < CONSTANT : "constant" >
 | < VARIABLE : "variable" >
 | < ASSIGN : "assign" >
-| < ATRIBUTION : ">>" >
+| < ATRIBUTION : ">>>" >
 | < ACQUIRE : "acquire" >
 | < SHOW : "show" >
 | < PUT : "put" >
 | < CHECK : "check" >
+| < RESULT : "result" >
 | < _TRUE : "true" >
 | < _UNTRUE : "untrue" >
 | < CARRY : "carry" >

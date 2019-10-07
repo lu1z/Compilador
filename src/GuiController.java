@@ -13,7 +13,8 @@ public class GuiController extends VBox {
     public void doCompile(Event e) throws FileNotFoundException {
     	TextArea to = (TextArea) App.scene.lookup("#text_output");
     	TextArea ti = (TextArea) App.scene.lookup("#text_input");   
-        App.listTokens(ti, to);
+        //App.listTokens(ti, to);
+        App.compileSyntax(ti, to);
     }
     
     @FXML

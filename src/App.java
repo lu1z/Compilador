@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,6 +36,14 @@ public class App extends Application implements Linguagem20192Constants {
 		primaryStage.show();
 		addTextImputAreaACursorListener();
 		addTextImputAreaTextLIstener();
+		fix();
+	}
+
+	private void fix() {
+    	TextArea ti = (TextArea) App.scene.lookup("#text_input"); 
+    	ScrollBar scrollBarv = (ScrollBar)ti.lookup(".scroll-bar:vertical");
+    	scrollBarv.setDisable(true);
+    	scrollBarv.setOpacity(0);
 	}
 
 	private void addTextImputAreaTextLIstener() {
@@ -63,15 +72,20 @@ public class App extends Application implements Linguagem20192Constants {
 				String rawText = ta.getText().substring(0, newValue.intValue());
 				String[] lineCharacters = rawText.split("\n");
 				int lines = lineCharacters.length;
+				if(lines < 1) {
+					lines = rawText.length();
+					la.setText("Line: " + (lines + 1) + " Collun: " + 1);
+					return;
+				}
 				String lastLineCharacters = lineCharacters[lines - 1];
 				int colluns = lastLineCharacters.length();
 				char c = '\0';
 				if (newValue.intValue() > 0)
 					c = rawText.charAt(newValue.intValue() - 1);
 				if (c == '\n')
-					la.setText("Line: " + (lines + 1) + " Collun: " + 0);
+					la.setText("Line: " + (lines + 1) + " Collun: " + 1);
 				else
-					la.setText("Line: " + lines + " Collun: " + colluns);
+					la.setText("Line: " + lines + " Collun: " + (colluns + 1));
 			}
 		});
 	}
@@ -97,6 +111,34 @@ public class App extends Application implements Linguagem20192Constants {
 			parser = new Linguagem20192(reader);
 		}
 	}
+	
+	public static void compileSyntax(TextArea ti, TextArea to) {
+		String input = ti.getText();
+		to.clear();
+		Reader reader = new StringReader(input);
+		try {
+			parser = new Linguagem20192(reader);		
+			parser.syntax();
+			to.setText("parse successful");
+		} catch (TokenMgrError er) {
+			to.setText(er.getMessage());
+			System.out.println(er.getMessage());
+			parser = new Linguagem20192(reader);
+		} catch (Error er) {
+			to.setText(er.getMessage());
+			System.out.println(er.getMessage());
+			parser = new Linguagem20192(reader);
+		} catch (ParseException er) {
+			to.setText(er.getMessage());
+			er.printStackTrace();
+		}
+	}
+
+	private static String addErrorType(String message) {
+		String s = message.replaceFirst(".*\".*\".*\"(.*)\"", "$1");
+		s = message.replaceFirst(".*<EOF>.*(.*)", "$1");	
+		return s;
+	}
 
 	public static String category(int kind) {
 		if (kind >= 14 & kind <= 19)
@@ -109,13 +151,13 @@ public class App extends Application implements Linguagem20192Constants {
 			return "LOGIC OPERATORS";
 		if (kind >= 37 & kind <= 40)
 			return "DATA TYPES";
-		if (kind >= 41 & kind <= 58)
+		if (kind >= 41 & kind <= 59)
 			return "RESERVED WORDS";
-		if (kind >= 59 & kind <= 62)
+		if (kind >= 60 & kind <= 63)
 			return "CONSTANTS";
-		if (kind >= 63 & kind <= 63)
+		if (kind >= 64 & kind <= 64)
 			return "IDENTIFIER";
-		if (kind >= 64 & kind <= 68)
+		if (kind >= 65 & kind <= 69)
 			return "AUXILIARIES";
 		return "MICELANIOUS";
 	}
