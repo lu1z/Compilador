@@ -2,148 +2,171 @@
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
  */options{  STATIC = false;
   DEBUG_LOOKAHEAD = true;}PARSER_BEGIN(Linguagem20192)
-public class Linguagem20192{}
+public class Linguagem20192{
+    int exeptionId = 0;
+ 
+    public int getExeptionId() {
+        return exeptionId;
+    }}
 PARSER_END(Linguagem20192)
 
-void syntax() : { }
+void syntax() : { exeptionId = 1; }
 {
   	<PROGRAM> <IDENTIFIER> <OPEN_SQUARE_BRACKETS> <CLOSED_SQUARE_BRACKET>
-		const_var_declaration()
+		( const_var_declaration() | Empty() )
 		<EXECUTE> <THIS> <OPEN_SQUARE_BRACKETS>
 			command_list()
 		<CLOSED_SQUARE_BRACKET>	  purpose_comentary()
 	<EOF>
 }
 
-void const_var_declaration() : { }
+void const_var_declaration() : { exeptionId = 2; }
 {
   <DECLARE> <THIS> <OPEN_SQUARE_BRACKETS>
-	<AS> const_var_existence()
+	<AS> (Const() | var())
   <CLOSED_SQUARE_BRACKET>
 
 }
 
-void const_var_existence() : { }
+void Const() : { exeptionId = 3; }
 {
-  (    (Const())* (var())* )| ((var())* (Const())*)
+  <CONSTANT> (ident_list() <DECLARATION>
+( <INTEGER > <DECLARATION > <INTEGER_CONSTANT>
+| <REAL > <DECLARATION > <REAL_CONSTANT>
+| <STRING > <DECLARATION > <LITERAL_CONSTANT>
+| <BOOLEAN > <DECLARATION > ( <TRUE > | < UNTRUE >) ) < DOT >)+
+( var2() | Empty() )
 }
 
-void Const() : { }
+void var() : { exeptionId = 4; }
 {
-  <CONSTANT > ( ident_list() <DECLARATION >
-( < INTEGER > <DECLARATION > <INTEGER_CONSTANT >
-| < REAL > <DECLARATION > <REAL_CONSTANT >
-| < STRING > <DECLARATION > <LITERAL_CONSTANT >))+
-}
-
-void var() : { }
-{
-  < VARIABLE > ( ident_list() <DECLARATION >
+  < VARIABLE > (ident_list() <DECLARATION >
 (< INTEGER >
 | < REAL >
 | < STRING >
-| < BOOLEAN >))+    
+| < BOOLEAN >) < DOT >)+
+( Const2() | Empty() )
 }
 
-void ident_list() : { }
+void Const2() : { exeptionId = 3; }
 {
-  <IDENTIFIER> ( <COMMA> <IDENTIFIER > )*
+  <AS ><CONSTANT>  (ident_list() <DECLARATION >
+( <INTEGER > <DECLARATION > <INTEGER_CONSTANT>
+| <REAL > <DECLARATION > <REAL_CONSTANT>
+| <STRING > <DECLARATION > <LITERAL_CONSTANT>
+| <BOOLEAN > <DECLARATION > ( <TRUE > | < UNTRUE >) ) < DOT >)+
 }
 
-void atribution_command() : { }
+void var2() : { exeptionId = 4; }
 {
-  < ASSIGN > <THIS > ident_list() < _MORE > expressao()
+  <AS > < VARIABLE > (ident_list() <DECLARATION >
+(< INTEGER >
+| < REAL >
+| < STRING >
+| < BOOLEAN >) < DOT >)+
 }
 
-void expressao() : { }
+void ident_list() : { exeptionId = 5; }
+{
+  <IDENTIFIER> indice() ident_list_conti()
+}
+
+void ident_list_conti() : { exeptionId = 5; }
+{    <COMMA> ident_list() | Empty() 
+}
+
+void atribution_command() : { exeptionId = 6; }
+{
+  < ASSIGN > <THIS > ident_list() < _MORE > expressao() < DOT >
+}
+
+void expressao() : { exeptionId = 7; }
 {
   expressao_arit_logic() expressaoL()
 }
 
-void expressaoL() : { }
+void expressaoL() : { exeptionId = 7; }
 {
-(<EQUAL>
+((<EQUAL>
 | < DIFFERENT>
 | < _MORE>
 | < _LESS>
 | < MORE_EQUAL>
-| < LESS_EQUAL>) expressao_arit_logic() | Empty()
+| < LESS_EQUAL>) expressao_arit_logic()) | Empty()
 }
 
-void expressao_arit_logic() : { }
+void expressao_arit_logic() : { exeptionId = 7; }
 {
   term2() menor_prioridade()
 }
 
-void menor_prioridade() : { }
+void menor_prioridade() : { exeptionId = 7; }
 {
-  < PLUS > term2() menor_prioridade()
-| < MINUS > term2() menor_prioridade()
-| < OR > term2() menor_prioridade()
+  (< PLUS > term2() menor_prioridade())
+| (< MINUS > term2() menor_prioridade())
+| (< OR > term2() menor_prioridade())
 | Empty()
 }
 
-void term2() : { }
+void term2() : { exeptionId = 7; }
 {
   term1() media_prioridade()
 }
 
-void media_prioridade() : { }
+void media_prioridade() : { exeptionId = 7; }
 {
 
-(< AND >
+((< AND >
 | < DIVISION_REST >
 | < EXACT_DIVISION>
 | < MULTIPLY >
-| < DIVIDE >) term1() media_prioridade() | Empty()
+| < DIVIDE >) term1() media_prioridade()) | Empty()
 }
 
-void term1() : { }
+void term1() : { exeptionId = 7; }
 {
   elemento() maior_prioridade()
 }
 
-void maior_prioridade() : { }
+void maior_prioridade() : { exeptionId = 7; }
 {
-  <POW > elemento() maior_prioridade() | Empty()
+  (<POW > elemento() maior_prioridade()) | Empty()
 }
 
-void elemento() : { }
+void elemento() : { exeptionId = 7; }
 {
-  < IDENTIFIER > indice()
+  (< IDENTIFIER > indice())
   | <INTEGER_CONSTANT >
   | < REAL_CONSTANT >
   | <LITERAL_CONSTANT >
-  | < _TRUE >
-  | < _UNTRUE >
-  | < OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>
-  | < NOT > < OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>
+  | < TRUE >
+  | < UNTRUE >
+  | (< OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>)
+  | (< NOT > < OPEN_PARENTHESE> expressao() < CLOSED_PARENTHESE>)
   
 }  
 
-void indice() : { }
+void indice() : { exeptionId = 8; }
 {
-  < OPEN_SQUARE_BRACKETS> <INTEGER_CONSTANT > <CLOSED_SQUARE_BRACKET>
+  (    <OPEN_PARENTHESE> <INTEGER_CONSTANT > <CLOSED_PARENTHESE>) | Empty() 
 }
 
-void command_list() : { }
+void command_list() : { exeptionId = 9; }
 {
   (atribution_command() | data_in_command() | data_out_command() | selection_command() | repetition_command())+
 }
 
-void purpose_comentary() : { }
+void purpose_comentary() : { exeptionId = 10; }
 {
   <PURPOSE> <LITERAL_CONSTANT> | Empty()
 }
 
-void data_in_command() : { }
+void data_in_command() : { exeptionId = 11; }
 {
- <ACQUIRE> <THIS> < OPEN_SQUARE_BRACKETS> ident_list() (< COMMA > ident_list() )*  <CLOSED_SQUARE_BRACKET> 
+ <ACQUIRE> <THIS> < OPEN_SQUARE_BRACKETS> ident_list() (< COMMA > ident_list() )*  <CLOSED_SQUARE_BRACKET> <DOT >
 }
 
-
-
-void data_out_command() : { }
+void data_out_command() : { exeptionId = 12; }
 {
  (<SHOW> | <PUT> ) <THIS>  < OPEN_SQUARE_BRACKETS> (ident_list()
  | <REAL_CONSTANT>
@@ -153,22 +176,42 @@ void data_out_command() : { }
   (<COMMA> (ident_list()
    | <REAL_CONSTANT>
    | <INTEGER_CONSTANT>
-   | <LITERAL_CONSTANT>) )*
+   | <LITERAL_CONSTANT>) )* <CLOSED_SQUARE_BRACKET> < DOT >
 }
 
-void selection_command() : { }
+void selection_command() : { exeptionId = 13; }
 {
- <CHECK> <THIS> expressao() (<_TRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>
- | <_UNTRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>)
+ <CHECK> <THIS> expressao() (
+   trueTerm()
+ | untrueTerm() ) <DOT>
 }
 
-void repetition_command() : { }
+void trueTerm() : { exeptionId = 13; }
 {
- <CARRY> <OUT> <THIS> expressao()  (< OPEN_SQUARE_BRACKETS>  command_list() <CLOSED_SQUARE_BRACKET> )*
+  <TRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET> (untrueTerm2() | Empty())
 }
 
+void untrueTerm() : { exeptionId = 13; }
+{
+  <UNTRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET> (trueTerm2() | Empty())
+}
 
-void Empty() : {}
+void trueTerm2() : { exeptionId = 13; }
+{
+  <TRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>
+}
+
+void untrueTerm2() : { exeptionId = 13; }
+{
+  <UNTRUE> <RESULT> < OPEN_SQUARE_BRACKETS> command_list() <CLOSED_SQUARE_BRACKET>
+}
+
+void repetition_command() : { exeptionId = 14; }
+{
+ <CARRY> <OUT> <THIS> expressao()  < OPEN_SQUARE_BRACKETS>  command_list() <CLOSED_SQUARE_BRACKET>  < DOT >
+}
+
+void Empty() : { exeptionId = 0; }
 {
 	{}
 }
@@ -244,6 +287,15 @@ TOKEN [IGNORE_CASE] : /* DATA_TYPES */
 | < BOOLEAN : "boolean" >
 }
 
+TOKEN [IGNORE_CASE] : /* CONSTANTS */
+{
+  < INTEGER_CONSTANT : (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)? >
+| < REAL_CONSTANT: (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?"."(<DIGIT>)(<DIGIT>)?(<DIGIT>)? >
+| < LITERAL_CONSTANT : "\"" <CHAR><CHAR>(<CHAR>)* "\"" >
+| < TRUE : "true" >
+| < UNTRUE : "untrue" >
+}
+
 TOKEN [IGNORE_CASE] : /* RESERVED_WORDS */
 {
   < PROGRAM : "program" >
@@ -261,18 +313,8 @@ TOKEN [IGNORE_CASE] : /* RESERVED_WORDS */
 | < PUT : "put" >
 | < CHECK : "check" >
 | < RESULT : "result" >
-| < _TRUE : "true" >
-| < _UNTRUE : "untrue" >
 | < CARRY : "carry" >
 | < OUT : "out" >
-}
-
-TOKEN [IGNORE_CASE] : /* CONSTANTS */
-{
-  < LOGIC_CONSTANT : "true" | "untrue" >
-| < INTEGER_CONSTANT : (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)? >
-| < REAL_CONSTANT: (<DIGITN0>)(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?(<DIGIT>)?"."(<DIGIT>)(<DIGIT>)?(<DIGIT>)? >
-| < LITERAL_CONSTANT : "\"" <CHAR><CHAR>(<CHAR>)* "\"" >
 }
 
 TOKEN : /* IDENTIFIER */

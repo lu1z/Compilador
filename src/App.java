@@ -129,8 +129,9 @@ public class App extends Application implements Linguagem20192Constants {
 			System.out.println(er.getMessage());
 			parser = new Linguagem20192(reader);
 		} catch (ParseException er) {
-			to.setText(er.getMessage());
-			er.printStackTrace();
+			to.setText(getHeaderExeption(er) + er.getMessage());
+			System.out.println(er.getMessage());
+			parser = new Linguagem20192(reader);
 		}
 	}
 
@@ -151,14 +152,53 @@ public class App extends Application implements Linguagem20192Constants {
 			return "LOGIC OPERATORS";
 		if (kind >= 37 & kind <= 40)
 			return "DATA TYPES";
-		if (kind >= 41 & kind <= 59)
-			return "RESERVED WORDS";
-		if (kind >= 60 & kind <= 63)
+		if (kind >= 41 & kind <= 45)
 			return "CONSTANTS";
-		if (kind >= 64 & kind <= 64)
+		if (kind >= 46 & kind <= 62)
+			return "RESERVED WORDS";
+		if (kind >= 63 & kind <= 63)
 			return "IDENTIFIER";
-		if (kind >= 65 & kind <= 69)
+		if (kind >= 64 & kind <= 68)
 			return "AUXILIARIES";
 		return "MICELANIOUS";
 	}
+	
+	private static String getHeaderExeption(ParseException er) {
+		int id = parser.getExeptionId();
+		switch (id) {
+			case 0 : ;
+				return "Error in Epsylon choice.\n";
+			case 1 : ;
+				return "Error in general program extructure.\n";
+			case 2 :
+				return "Error in variable and constant declaration extructure.\n";
+			case 3 :
+				return "Error in constant declaration extructure.\n"; 
+			case 4 :
+				return "Error in variable declaration extructure.\n"; 
+			case 5 :
+				return "Error in indentifier list extructure.\n"; 
+			case 6 :
+				return "Error in atribution command extructure.\n"; 
+			case 7 :
+				return "Error in expression instance.\n"; 
+			case 8 :
+				return "Error in indentifier indexation.\n"; 
+			case 9 :
+				return "Error in command list extructure.\n"; 
+			case 10 :
+				return "Error in purpose comentary.\n"; 
+			case 11 : 
+				return "Error in data input command extructure.\n";
+			case 12 : 
+				return "Error in data output command extructure.\n";
+			case 13 : 
+				return "Error in data selection command extructure.\n";
+			case 14 : 
+				return "Error in data repetition command extructure.\n";
+			default :
+				return "Error in parsing operation.\n";		
+		}
+	}
+	
 }

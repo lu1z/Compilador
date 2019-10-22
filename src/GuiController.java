@@ -43,7 +43,10 @@ public class GuiController extends VBox {
     }
     @FXML
     public void doNew(Event e){
-        System.out.println("Button clicked");
+        TextArea ta = (TextArea) App.scene.lookup("#text_input");
+        ta.clear();
+        Label la = (Label) App.scene.lookup("#label_file_name");
+        la.setText("Unknown file");
     }
     @FXML
     public void doExit(Event e){

@@ -1,0 +1,25 @@
+program Teste []
+ declare this [
+  as constant
+   Testi = boolean = untrue.
+   Testa = boolean = true.
+  as variable
+   Testo = integer.
+   Testu(99) = integer.
+]
+execute this [
+ assign this T1este >> 10.
+ acquire this [ T2ste, T3ste ].
+ show this [ T4ste, T5ste ].
+ put this [ T6ste, T7ste ].
+ carry out this T2ste * T3ste [
+  check this T2ste * T3ste
+   true result [
+    show this [ T4ste, T5ste ].
+   ]
+   untrue result [
+    put this [ T6ste, T7ste ].
+   ].
+ ].
+]
+purpose "testing"

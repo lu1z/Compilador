@@ -33,7 +33,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ToolBar maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER">
+      <ToolBar maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER">
         <items>
           <Button fx:id="toolbar_button_execute" mnemonicParsing="false" onAction="#doExecute" text="Execute" />
             <Button fx:id="toolbar_button_compile" mnemonicParsing="false" onAction="#doCompile" text="Compile" />

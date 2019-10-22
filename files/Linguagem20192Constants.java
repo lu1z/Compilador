@@ -63,63 +63,61 @@ public interface Linguagem20192Constants {
   /** RegularExpression Id. */
   int BOOLEAN = 40;
   /** RegularExpression Id. */
-  int PROGRAM = 41;
+  int INTEGER_CONSTANT = 41;
   /** RegularExpression Id. */
-  int EXECUTE = 42;
+  int REAL_CONSTANT = 42;
   /** RegularExpression Id. */
-  int THIS = 43;
+  int LITERAL_CONSTANT = 43;
   /** RegularExpression Id. */
-  int PURPOSE = 44;
+  int TRUE = 44;
   /** RegularExpression Id. */
-  int DECLARE = 45;
+  int UNTRUE = 45;
   /** RegularExpression Id. */
-  int AS = 46;
+  int PROGRAM = 46;
   /** RegularExpression Id. */
-  int CONSTANT = 47;
+  int EXECUTE = 47;
   /** RegularExpression Id. */
-  int VARIABLE = 48;
+  int THIS = 48;
   /** RegularExpression Id. */
-  int ASSIGN = 49;
+  int PURPOSE = 49;
   /** RegularExpression Id. */
-  int ATRIBUTION = 50;
+  int DECLARE = 50;
   /** RegularExpression Id. */
-  int ACQUIRE = 51;
+  int AS = 51;
   /** RegularExpression Id. */
-  int SHOW = 52;
+  int CONSTANT = 52;
   /** RegularExpression Id. */
-  int PUT = 53;
+  int VARIABLE = 53;
   /** RegularExpression Id. */
-  int CHECK = 54;
+  int ASSIGN = 54;
   /** RegularExpression Id. */
-  int RESULT = 55;
+  int ATRIBUTION = 55;
   /** RegularExpression Id. */
-  int _TRUE = 56;
+  int ACQUIRE = 56;
   /** RegularExpression Id. */
-  int _UNTRUE = 57;
+  int SHOW = 57;
   /** RegularExpression Id. */
-  int CARRY = 58;
+  int PUT = 58;
   /** RegularExpression Id. */
-  int OUT = 59;
+  int CHECK = 59;
   /** RegularExpression Id. */
-  int LOGIC_CONSTANT = 60;
+  int RESULT = 60;
   /** RegularExpression Id. */
-  int INTEGER_CONSTANT = 61;
+  int CARRY = 61;
   /** RegularExpression Id. */
-  int REAL_CONSTANT = 62;
+  int OUT = 62;
   /** RegularExpression Id. */
-  int LITERAL_CONSTANT = 63;
+  int IDENTIFIER = 63;
   /** RegularExpression Id. */
-  int IDENTIFIER = 64;
+  int LETTER = 64;
   /** RegularExpression Id. */
-  int LETTER = 65;
+  int CHAR = 65;
   /** RegularExpression Id. */
-  int CHAR = 66;
+  int DIGIT = 66;
   /** RegularExpression Id. */
-  int DIGIT = 67;
+  int DIGITN0 = 67;
   /** RegularExpression Id. */
-  int DIGITN0 = 68;
-  /** RegularExpression Id. */
-  int MALETTER = 69;
+  int MALETTER = 68;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -171,6 +169,11 @@ public interface Linguagem20192Constants {
     "\"real\"",
     "\"string\"",
     "\"boolean\"",
+    "<INTEGER_CONSTANT>",
+    "<REAL_CONSTANT>",
+    "<LITERAL_CONSTANT>",
+    "\"true\"",
+    "\"untrue\"",
     "\"program\"",
     "\"execute\"",
     "\"this\"",
@@ -186,14 +189,8 @@ public interface Linguagem20192Constants {
     "\"put\"",
     "\"check\"",
     "\"result\"",
-    "\"true\"",
-    "\"untrue\"",
     "\"carry\"",
     "\"out\"",
-    "<LOGIC_CONSTANT>",
-    "<INTEGER_CONSTANT>",
-    "<REAL_CONSTANT>",
-    "<LITERAL_CONSTANT>",
     "<IDENTIFIER>",
     "<LETTER>",
     "<CHAR>",
