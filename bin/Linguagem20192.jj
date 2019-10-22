@@ -72,7 +72,7 @@ void ident_list() : { exeptionId = 5; }
 }
 
 void ident_list_conti() : { exeptionId = 5; }
-{    <COMMA> ident_list() | Empty() 
+{    (<COMMA> ident_list()) | Empty() 
 }
 
 void atribution_command() : { exeptionId = 6; }
@@ -158,7 +158,7 @@ void command_list() : { exeptionId = 9; }
 
 void purpose_comentary() : { exeptionId = 10; }
 {
-  <PURPOSE> <LITERAL_CONSTANT> | Empty()
+  (<PURPOSE> <LITERAL_CONSTANT>) | Empty()
 }
 
 void data_in_command() : { exeptionId = 11; }

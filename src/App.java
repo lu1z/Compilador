@@ -169,33 +169,33 @@ public class App extends Application implements Linguagem20192Constants {
 			case 0 : ;
 				return "Error in Epsylon choice.\n";
 			case 1 : ;
-				return "Error in general program extructure.\n";
+				return "Error in general program structure.\n";
 			case 2 :
-				return "Error in variable and constant declaration extructure.\n";
+				return "Error in variable and constant declaration structure.\n";
 			case 3 :
-				return "Error in constant declaration extructure.\n"; 
+				return "Error in constant declaration structure.\n"; 
 			case 4 :
-				return "Error in variable declaration extructure.\n"; 
+				return "Error in variable declaration structure.\n"; 
 			case 5 :
-				return "Error in indentifier list extructure.\n"; 
+				return "Error in identifier  list structure.\n"; 
 			case 6 :
-				return "Error in atribution command extructure.\n"; 
+				return "Error in attribution command structure.\n"; 
 			case 7 :
 				return "Error in expression instance.\n"; 
 			case 8 :
-				return "Error in indentifier indexation.\n"; 
+				return "Error in identifier  indexation.\n"; 
 			case 9 :
-				return "Error in command list extructure.\n"; 
+				return "Error in command list structure.\n"; 
 			case 10 :
-				return "Error in purpose comentary.\n"; 
+				return "Error in purpose commentary.\n"; 
 			case 11 : 
-				return "Error in data input command extructure.\n";
+				return "Error in data input command structure.\n";
 			case 12 : 
-				return "Error in data output command extructure.\n";
+				return "Error in data output command structure.\n";
 			case 13 : 
-				return "Error in data selection command extructure.\n";
+				return "Error in data selection command structure.\n";
 			case 14 : 
-				return "Error in data repetition command extructure.\n";
+				return "Error in data repetition command structure.\n";
 			default :
 				return "Error in parsing operation.\n";		
 		}
